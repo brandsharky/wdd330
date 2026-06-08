@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Telematrix" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 120.94 157.73">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+        stroke: #5da9ff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="17.48" y1="27.46" x2="102.85" y2="112.83" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5da9ff"/>
+      <stop offset=".75" stop-color="#111"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="M119.75,60.97c.25,1.16.26,23.15,0,24.29-22.73,18.05-43.23,41.57-59.81,70.47C43.34,127.39,23.26,103.78,1.03,85.26l.75-25.8c17.14,11.9,32.98,27.59,47.07,46.01V31.73c-14.1,11.1-29.94,20.56-47.07,27.73l-.75-15.55C23.26,32.75,43.34,18.52,59.94,1.44c16.57,17.42,37.07,31.59,59.81,42.47.26.69.25,13.94,0,14.64-.11.33-.49.82-1.04.65-16.91-6.9-32.62-15.89-46.59-26.64v71.52c13.96-17.83,29.68-32.73,46.59-44.19.55-.28.93.53,1.04,1.08Z"/>
+</svg>

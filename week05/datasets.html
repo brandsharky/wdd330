@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    li[data-category="fruit"] {
+      background-color: lightyellow;
+    }
+
+    li[data-category="vegetable"] {
+      background-color: lightgreen;
+    }
+
+    li[data-category="dairy"] {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+
+  <ul id="items">
+    <li data-name="banana" data-category="fruit" data-color="yellow">Banana</li>
+    <li data-name="carrot" data-category="vegetable" data-color="orange">Carrot</li>
+    <li data-name="blueberry" data-category="fruit" data-color="blue">Blueberry</li>
+  </ul>
+
+  <script>
+    const listItems = document.querySelectorAll("li");
+
+    listItems.forEach(listItem => {
+      console.log(listItem.dataset.name);
+      console.log(listItem.dataset.category);
+      console.log(listItem.dataset.color)
+
+      listItem.addEventListener("click", () => {
+        const details = document.createElement("div");
+        details.innerHTML = `
+          <p>${listItem.dataset.name}</p>
+          <p>${listItem.dataset.category}</p>
+          <p>${listItem.dataset.color}</p>
+        `;
+        document.querySelector("body").appendChild(details);
+      })
+    });
+  </script>
+
+</body>
+</html>

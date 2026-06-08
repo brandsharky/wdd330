@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+
+  min-height: 100dvh;
+}
+
+
+h1 {
+  padding: 1rem 2rem;
+
+  border: 1px solid blue;
+}
+button{
+  padding: 1rem 2rem;
+
+  border-radius: 999px;
+  background-color: lightgreen;
+
+  border: 2px solid black;
+}
+
+
+
+
+
+
