@@ -49,6 +49,98 @@
 
 
 
+/*#region Home */
+
+/*#region Page Intro */
+@media screen and (max-width: 610px) {
+  .page-introduction {
+    width: calc(100% + 2rem);
+    margin: -4rem -1rem 0;
+  }
+}
+/*#endregion */
+
+
+
+
+
+
+
+/*#region Quick Links */
+@media screen and (max-width: 610px) {
+  main {
+    padding: 0 1rem;
+  }
+  #home-links h2 {
+    text-align: center;
+  }
+  .quick-links {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .quick-link {
+    min-height: 220px;
+  }
+}
+
+
+/*#endregion */
+
+/*#endregion */
+
+
+
+
+
+/*#region Shows */
+@media screen and (max-width: 325px) {
+  #show-grid {
+    padding: 1.5rem 0;
+  }
+}
+
+
+
+
+
+
+/*#endregion */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

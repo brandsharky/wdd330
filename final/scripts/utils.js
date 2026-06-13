@@ -95,6 +95,7 @@ export function createHeaderFooter() {
 
         <ul>
           <li><a href="https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg" target="_blank" rel="noopener noreferrer">Video Demo</a></li>
+          <li><a href="https://trello.com/b/Bc0A2KSq/wdd330-final-project" target="_blank" rel="noopener noreferrer">Trello</a></li>
           <li>Last updated: <span id="lastUpdated">${updated.toLocaleDateString("en-US", options)}</span></li>
         </ul>
       </div>
@@ -113,6 +114,7 @@ export function createHeaderFooter() {
 
     <div class="footer-section footer-bottom">
       <p>Made with <span>love</span> for television</p>
+      <p>Television data provided by <span>IMDb</span> and <span>OMDb</span>.</p>
       <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> Telematrix</p>
     </div>
   `;
@@ -161,6 +163,114 @@ function createResponsiveNavbar() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+//#region Fetch Data
+export async function fetchShowIDs() {
+  try {
+    const response = await fetch("data/shows.json");
+    if (response.ok) {
+      const data = await response.json();
+      return data.shows;
+    } else {
+      throw Error(await response.text());
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function fetchShowData(id) {
+  const apiKey = "e10faa8f";
+
+  try {
+    // const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(title)}`);
+    const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(id)}`);
+
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    const data = await response.json();
+
+    if (data.Response === "False") {
+      throw new Error(data.Error);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(`Error fetching "${title}":`, error);
+    return null;
+  }
+}
+//#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#region Create Show Cards
+export function createShowCard(showDataList, container) {
+  showDataList.forEach(show => {
+    const card = document.createElement("div");
+    card.classList.add("show-card");
+    card.innerHTML = `
+      <div class="card-banners">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        </button>
+
+        <span class="cw-banner">Currently Watching</span>
+
+        <span class="rating">${show.Rated}</span>
+      </div>
+
+      <img src="${show.Poster}" alt="${show.Title}" loading="lazy" width="300" height="400">
+
+      <div class="show-card-info">
+        <h3>${show.Title}</h3>
+
+        <p class="imdbRating">⭐ ${show.imdbRating}</p>
+        <p class="details">${show.Rated} &bull; ${show.Year} &bull; ${show.totalSeasons} seasons</p>
+        <p class="genres">${show.Genre.split(", ").slice(0, 2).join(" &bull; ")}</p>
+      </div>
+    `;
+
+
+
+    container.appendChild(card);
+  });
+}
+//#endregion
 
 
 
