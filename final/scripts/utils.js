@@ -1,27 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //#region Header/Footer
 export function createHeaderFooter() {
   const header = document.getElementById("header");
@@ -134,7 +110,6 @@ function setCurrentPage() {
     }
   });
 }
-
 function createResponsiveNavbar() {
   const menuBtn = document.querySelector("#ham-btn");
   const navMenu = document.querySelector("#nav-bar");
@@ -150,25 +125,6 @@ function createResponsiveNavbar() {
   });
 }
 //#endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -219,37 +175,21 @@ export async function fetchShowData(id) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //#region Create Show Cards
 export function createShowCard(showDataList, container) {
+  container.innerHTML = "";
+
   showDataList.forEach(show => {
-    const card = document.createElement("div");
+    const card = document.createElement("a");
+    card.href = `show.html?id=${show.imdbID}`;
     card.classList.add("show-card");
     card.innerHTML = `
       <div class="card-banners">
-        <button>
+        <button class="watchlist-toggle">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         </button>
 
-        <span class="cw-banner">Currently Watching</span>
+        <button class="cw-banner">Currently Watching</button>
 
         <span class="rating">${show.Rated}</span>
       </div>
@@ -266,12 +206,132 @@ export function createShowCard(showDataList, container) {
     `;
 
 
+    const watchlistBtn = card.querySelector(".watchlist-toggle");
+
+    if (isInWatchlist(show.imdbID)) {
+      watchlistBtn.classList.add("active");
+    }
+
+    watchlistBtn.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      toggleWatchlist(show.imdbID);
+
+      watchlistBtn.classList.toggle("active");
+
+      // If we're on the watchlist page
+      if (window.location.pathname.includes("watchlist.html")) {
+        card.remove();
+      }
+    });
+
+
+    const cwBanner = card.querySelector(".cw-banner");
+
+    if (getCurrentlyWatching() === show.imdbID) {
+      cwBanner.classList.add("active");
+    }
+
+    cwBanner.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const result = setCurrentlyWatching(show.imdbID);
+
+      if (result === null) {
+        cwBanner.classList.remove("active");
+      } else {
+        updateAllCWBanners(result);
+      }
+    });
+
+
 
     container.appendChild(card);
   });
 }
 //#endregion
 
+
+
+
+
+//#region Watchlist Functionality
+export function getWatchlist() {
+  return JSON.parse(localStorage.getItem("watchlist")) || [];
+}
+
+
+export function saveWatchlist(watchlist) {
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
+}
+
+
+export function isInWatchlist(imdbID) {
+  const watchlist = getWatchlist();
+  return watchlist.includes(imdbID);
+}
+
+
+export function toggleWatchlist(imdbID) {
+  const watchlist = getWatchlist();
+
+  const index = watchlist.indexOf(imdbID);
+
+  if (index === -1) {
+    watchlist.push(imdbID);
+  } else {
+    watchlist.splice(index, 1);
+  }
+
+  saveWatchlist(watchlist);
+}
+//#endregion
+
+
+
+
+
+
+
+
+
+
+
+//#region Currently Watching
+export function setCurrentlyWatching(imdbID) {
+  const current = localStorage.getItem("currentlyWatching");
+
+  if (current === imdbID) {
+    localStorage.removeItem("currentlyWatching");
+    return null;
+  }
+
+  localStorage.setItem("currentlyWatching", imdbID);
+  return imdbID;
+}
+
+export function getCurrentlyWatching() {
+  return localStorage.getItem("currentlyWatching");
+}
+
+function updateAllCWBanners(currentId) {
+  document.querySelectorAll(".show-card").forEach((card) => {
+    const banner = card.querySelector(".cw-banner");
+
+    if (!banner) return;
+
+    const cardId = card.href.split("id=")[1];
+
+    if (cardId === currentId) {
+      banner.classList.add("active");
+    } else {
+      banner.classList.remove("active");
+    }
+  });
+}
+//#endregion
 
 
 

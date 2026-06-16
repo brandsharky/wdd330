@@ -60,17 +60,7 @@ function renderMysteryCard(container) {
         Click to reveal your next binge.
       </p>
     </div>
-
-    <button class="reroll-btn">
-      Re-roll
-    </button>
   `;
 }
-
-
-
-
-
-
 
 

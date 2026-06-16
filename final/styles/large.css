@@ -97,6 +97,9 @@ section {
 
 
 
+
+
+
 /*#region Multiple Pages */
 
 /*#region Header */
@@ -581,15 +584,6 @@ footer .footer-section {
 
 
 
-
-
-
-
-
-
-
-
-
 /*#region Binge */
 #binge-container h2 {
   padding: 0.75rem 1.5rem;
@@ -668,36 +662,7 @@ footer .footer-section {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*#region Shows */
-
-
-/*#region Filters */
-/*#endregion */
-
-
 
 /*#region Show Gallery */
 #show-grid {
@@ -749,7 +714,7 @@ footer .footer-section {
 
   z-index: 2;
 }
-.card-banners button {
+.card-banners .watchlist-toggle {
   justify-self: start;
 
   display: grid;
@@ -766,17 +731,32 @@ footer .footer-section {
   overflow: hidden;
   outline: none;
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   color: var(--accent3);
   border: 2px solid var(--accent3);
+
+  transition: transform 0.5s ease, color 0.5s ease, border 0.5s ease;
 }
-.card-banners button svg {
+.card-banners .watchlist-toggle svg {
   width: 100%;
   height: 100%;
+
+  transition: transform 0.5s ease;
+}
+.card-banners .watchlist-toggle.active {
+  color: var(--accent2);
+  border: 2px solid var(--accent2);
+}
+.watchlist-toggle.active svg {
+  transform: rotate(45deg);
 }
 .card-banners .cw-banner {
   flex: 1;
+
+  opacity: 0;
+
+  position: relative;
 
   display: grid;
   place-items: center;
@@ -795,6 +775,13 @@ footer .footer-section {
   overflow: hidden;
   border-radius: 0.75rem;
 
+  transition: opacity 0.5s ease;
+}
+.show-card .cw-banner:hover {
+  opacity: 1;
+}
+.cw-banner.active {
+  opacity: 1;
 }
 .card-banners .rating {
   justify-self: end;
@@ -863,121 +850,357 @@ footer .footer-section {
 }
 /*#endregion */
 
-
-
-
-
 /*#endregion */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
 /*#region Watchlist */
+#watchlist-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+
+  min-height: 200px;
+
+  padding: 1.5rem;
+}
+#watchlist-grid  p {
+  font-size: 1rem;
+
+  color: var(--faded-text);
+}
+#watchlist-grid p a {
+  text-decoration: none;
+
+  color: var(--accent1);
+
+  transition: color 0.5s ease;
+}
+#watchlist-grid p a:hover {
+  color: var(--headers);
+}
 
 
+#watchlist-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+}
+#watchlist-grid .show-card {
+  background: linear-gradient(135deg, var(--card-focus-light), var(--card-focus-dark));
+  border: var(--card-focus-border);
+}
 /*#endregion */
 
 
 
 
 
+/*#region Show Details */
+#show-details {
+  position: relative;
 
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
 
+  padding: 1.5rem;
 
+  font-family: "Roboto Mono";
 
+  background: linear-gradient(var(--card-light), var(--card-dark));
+  border: var(--card-border);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
 
+#go-back-btn {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
 
+  display: grid;
+  place-items: center;
 
+  width: 2rem;
+  height: 2rem;
 
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--accent2);
+  border-radius: 999px;
+  border: 2px solid var(--accent2);
 
+  transition: color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
+}
+#go-back-btn:hover {
+  color: var(--accent3);
+  border: 2px solid var(--accent3);
+  box-shadow: var(--card-shadow);
+}
 
+#show-details .watchlist-toggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
 
+  display: grid;
+  place-items: center;
 
+  height: 2rem;
+  width: 2rem;
 
+  border-radius: 0.75rem;
+  overflow: hidden;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--accent3);
+  border: 2px solid var(--accent3);
 
+  transition: transform 0.5s ease, color 0.5s ease, border 0.5s ease;
+}
+#show-details .watchlist-toggle svg {
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.5s ease;
+}
+#show-details .watchlist-toggle.active {
+  color: var(--accent2);
+  border: 2px solid var(--accent2);
+}
+#show-details.active svg {
+  transform: rotate(45deg);
+}
+
+#show-details .info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+#show-details .info img {
+  width: 100%;
+  max-width: 300px;
+
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+#show-details .info .key-info {
+  flex: 1;
+
+  display: grid;
+  place-items: center;
+}
+#show-details .info .key-info .details {
+  display: grid;
+  gap: 0.75rem;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  p {
+    display: block;
+  }
+  .imdbRating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-weight: bold;
+  }
+  .details {
+    font-size: 0.85rem;
+    text-align: center;
+
+    color: var(--faded-text);
+  }
+  .genres {
+    text-align: center;
+  }
+  .awards {
+    text-align: center;
+
+    color: var(--accent1);
+  }
+}
+
+#show-details .peoples {
+  flex: 1;
+
+  display: grid;
+  gap: 1rem;
+
+  text-align: left;
+}
+#show-details .peoples > div {
+  display: grid;
+  gap: 0.25rem;
+
+  h3 {
+    font-size: 1.5rem;
+
+    color: var(--headers);
+  }
+  p {
+    color: var(--faded-text);
+  }
+}
+/*#endregion */
 
 
 
 
 
 /*#region Expand */
+.expansion-form {
+  width: 100%;
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding: 1.5rem;
+
+  background: linear-gradient(135deg, var(--card-light), var(--card-dark));
+  border: var(--card-border);
+}
 
 
+
+.form-group {
+  display: grid;
+  gap: 0.25rem;
+}
+.form-group label {
+  font-size: 1.25rem;
+}
+input, button, select, textarea {
+  font: inherit;
+}
+
+.form-group input:not([type="submit"]), .form-group textarea {
+  width: 100%;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 1rem;
+  background-color: transparent;
+  color: var(--headers);
+  border: var(--card-border);
+  outline: none;
+  accent-color: none;
+
+  transition: border 0.5s ease;
+}
+.form-group input:not([type="submit"]):focus, .form-group textarea:focus  {
+  background-color: transparent;
+  border: 2px solid var(--accent1);
+}
+
+.form-group input:not([type="submit"]):invalid:not(:placeholder-shown) {
+  border: 2px solid var(--accent2);
+}
+.form-group input:not([type="submit"]):valid:not(:placeholder-shown), .form-group textarea:valid {
+  border: 2px solid var(--accent3);
+}
+
+input[type="submit"] {
+  padding: 1rem;
+
+  font-size: 1.25rem;
+
+  background-color: var(--accent2-bg);
+  border: 2px solid var(--accent2);
+  color: var(--accent2);
+  border-radius: 999px;
+
+  transition: background-color 0.5s ease, border 0.5s ease, color 0.5s ease, transform 0.5s ease;
+}
+form:valid input[type="submit"] {
+  color: var(--accent3);
+  background-color: var(--accent3-bg);
+  border: 2px solid var(--accent3);
+}
+form:valid input[type="submit"]:hover {
+  transform: translateY(-6px);
+}
 /*#endregion */
 
 
 
 
 
+/*#region Success */
+#results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
+  width: 100%;
+  max-width: 600px;
 
+  padding: 1.5rem;
 
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: var(--card-border);
+  background: linear-gradient(135deg, var(--card-light), var(--card-dark));
+}
 
+#results h2 {
+  color: var(--headers);
+}
+#results p {
+  color: var(--faded-text);
+}
+#results span {
+  font-weight: bold;
 
+  color: var(--accent1);
+}
+#results a {
+  display: grid;
+  place-items: center;
 
+  width: 2rem;
+  height: 2rem;
 
+  border-radius: 999px;
+  overflow: hidden;
 
+  border: 2px solid var(--accent2);
+  color: var(--accent2);
+  background-color:rgba(0, 0, 0, 0.7);
 
-
-
-
-
-
-
-
-
-
-/*region Success */
-
-
-
-
+  transition: all 0.5s ease;
+}
+#results a:hover {
+  color: var(--accent3);
+  border: 2px solid var(--accent3);
+  box-shadow: var(--card-shadow);
+}
 /*#endregion */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
