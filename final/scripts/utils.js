@@ -49,7 +49,7 @@ export function createHeaderFooter() {
         </p>
       </div>
 
-      <a href="https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg" target="_blank" rel="noopener noreferrer">Watch Demo</a>
+      <a href="https://www.loom.com/share/22195a99693f4b96a22e4ef231fcce59" target="_blank" rel="noopener noreferrer">Watch Demo</a>
     </div>
 
 
@@ -70,7 +70,7 @@ export function createHeaderFooter() {
         <h3>Telematrix</h3>
 
         <ul>
-          <li><a href="https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg" target="_blank" rel="noopener noreferrer">Video Demo</a></li>
+          <li><a href="https://www.loom.com/share/22195a99693f4b96a22e4ef231fcce59" target="_blank" rel="noopener noreferrer">Video Demo</a></li>
           <li><a href="https://trello.com/b/Bc0A2KSq/wdd330-final-project" target="_blank" rel="noopener noreferrer">Trello</a></li>
           <li>Last updated: <span id="lastUpdated">${updated.toLocaleDateString("en-US", options)}</span></li>
         </ul>
@@ -90,7 +90,8 @@ export function createHeaderFooter() {
 
     <div class="footer-section footer-bottom">
       <p>Made with <span>love</span> for television</p>
-      <p>Television data provided by <span>IMDb</span> and <span>OMDb</span>.</p>
+      <p>Television data powered by <span>IMDb</span> and <span>OMDb</span>.</p>
+      <p>Delivered fresh by <span>EmailJS</span></p>
       <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> Telematrix</p>
     </div>
   `;
